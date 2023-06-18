@@ -1,6 +1,6 @@
 package com.sda.company.controller;
 
-import com.sda.company.exceptions.CompanyException;
+import com.sda.company.exceptions.EntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,11 +14,11 @@ import java.util.Map;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(CompanyException.class)
-    public ResponseEntity<Object> handleCompanyException(CompanyException companyException) {
+    @ExceptionHandler(EntityException.class)
+    public ResponseEntity<Object> handleCompanyException(EntityException entityException) {
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("Timestamp", LocalDateTime.now());
-        responseBody.put("Error message", companyException.getLocalizedMessage());
+        responseBody.put("Error message", entityException.getLocalizedMessage());
 
         return new ResponseEntity<>(responseBody, HttpStatus.NOT_FOUND);
     }

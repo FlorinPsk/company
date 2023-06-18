@@ -1,4 +1,4 @@
-package com.sda.company.converter;
+package com.sda.company.convertor;
 
 import com.sda.company.dto.CompanyCreateDTO;
 import com.sda.company.dto.CompanyDisplayDTO;
@@ -12,6 +12,7 @@ public class CompanyConvertor {
         company.setEmail(companyCreateDTO.getEmail());
         company.setAddress(companyCreateDTO.getAddress());
         company.setRegistrationNumber(companyCreateDTO.getRegistrationNumber());
+
         return company;
     }
 
@@ -22,6 +23,7 @@ public class CompanyConvertor {
         companyDisplayDTO.setEmail(company.getEmail());
         companyDisplayDTO.setAddress(company.getAddress());
         companyDisplayDTO.setRegistrationNumber(company.getRegistrationNumber());
+
         return companyDisplayDTO;
     }
 }

@@ -32,8 +32,7 @@ public class CompanyController {
 
     @PostMapping("/create")
     public ResponseEntity<CompanyDisplayDTO> createCompany(
-            @RequestBody @Valid CompanyCreateDTO companyCreateDTO
-    ) {
+            @RequestBody @Valid CompanyCreateDTO companyCreateDTO) {
         CompanyDisplayDTO companyDisplayDTO = companyService
                 .createCompany(companyCreateDTO);
 
