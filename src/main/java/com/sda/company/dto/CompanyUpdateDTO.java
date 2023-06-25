@@ -7,7 +7,10 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
-public class CompanyCreateDTO implements Serializable {
+public class CompanyUpdateDTO implements Serializable {
+
+    @NotNull
+    private Integer id;
 
     // For String's we use this annotation instead of @NotNull bc an empty String is not null!
     @NotBlank(message = "Company name is mandatory!")
@@ -23,6 +26,14 @@ public class CompanyCreateDTO implements Serializable {
     @NotBlank(message = "Email is mandatory!")
     @Email(message = "Invalid email!")
     private String email;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

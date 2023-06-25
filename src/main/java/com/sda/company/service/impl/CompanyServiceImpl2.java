@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class CompanyServiceImpl implements CompanyService {
+@Service("myCompanyServiceImpl") // camel-case is usually used in this situation
+public class CompanyServiceImpl2 implements CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
+    public CompanyServiceImpl2(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
 
@@ -42,7 +42,7 @@ public class CompanyServiceImpl implements CompanyService {
         List<CompanyDisplayDTO> companyDisplayDTOList = new ArrayList<>();
         companyRepository.findAll(pageable).
                 forEach(entity ->
-                        companyDisplayDTOList.add(CompanyConvertor.entityToDisplayDto(entity)));
+                companyDisplayDTOList.add(CompanyConvertor.entityToDisplayDto(entity)));
 
         return companyDisplayDTOList;
     }
@@ -72,12 +72,12 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyDisplayDTO updateCompany(CompanyUpdateDTO companyUpdateDTO) {
-        if (companyRepository.findById(companyUpdateDTO.getId()).isPresent()) {
-            throw new EntityException(String.format("Company with id %s was not found.", companyUpdateDTO.getId()));
+    public CompanyDisplayDTO updateCompany(CompanyUpdateDTO companyUpdateDto) {
+        if (companyRepository.findById(companyUpdateDto.getId()).isPresent()){
+            throw new EntityException(String.format("Company %s not found.", companyUpdateDto.getId()));
         }
 
-        Company company = CompanyConvertor.updateDtoToEntity(companyUpdateDTO);
+        Company company = CompanyConvertor.updateDtoToEntity(companyUpdateDto);
         Company updatedCompany = companyRepository.save(company);
 
         return CompanyConvertor.entityToDisplayDto(updatedCompany);
@@ -85,8 +85,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteCompanyById(Integer id) {
-        if (companyRepository.findById(id).isEmpty()) {
-            throw new EntityException(String.format("Company with id %s was not found.", id));
+        if (companyRepository.findById(id).isEmpty()){
+            throw new EntityException(String.format("Company %s not found", id));
         }
         companyRepository.deleteById(id);
     }

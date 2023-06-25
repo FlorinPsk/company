@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Landing Page</title>
+</head>
+<body>
+
+<p>Welcome to the application.</p>
+<form th:action="@{/company}" th:object="${gdprConsent}" method="post">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" autofocus="autofocus">
+    <br>
+    <label for="gdprConsent">GDPR Consent</label>
+    <input type="checkbox" id="gdprConsent" name="gdprConsent">
+    <br>
+    <input type="submit" value="submit">
+
+</form>
+
+<p th:text="${errorMessage}"></p>
+
+</body>
+</html>

@@ -3,7 +3,9 @@ package com.sda.company.dto;
 import com.sda.company.model.JobTitle;
 import jakarta.validation.constraints.*;
 
-public class EmployeeCreateDTO {
+import java.io.Serializable;
+
+public class EmployeeCreateDTO implements Serializable {
 
     @NotBlank(message = "Employee name is mandatory!")
     private String name;

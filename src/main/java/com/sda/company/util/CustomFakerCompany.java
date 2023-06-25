@@ -2,6 +2,7 @@ package com.sda.company.util;
 
 import com.github.javafaker.Faker;
 import com.sda.company.model.Company;
+
 import java.util.ArrayList;
 import java.util.List;
 

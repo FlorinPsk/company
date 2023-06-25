@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Landing Page</title>
+</head>
+<body>
+<p th:text="${hello} + ${userName}"></p>
+<p th:text="${welcomeMessage}"></p>
+<a th:href="@{/start}">Go to the app...</a>
+</body>
+</html>
