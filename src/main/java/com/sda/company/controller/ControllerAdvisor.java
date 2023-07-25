@@ -1,10 +1,15 @@
 package com.sda.company.controller;
 
 import com.sda.company.exceptions.EntityException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
@@ -21,5 +26,16 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         responseBody.put("Error message", entityException.getLocalizedMessage());
 
         return new ResponseEntity<>(responseBody, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("Timestamp", LocalDateTime.now());
+        responseBody.put("Error message", "Please check the request body!");
+        responseBody.put("Localized error message", ex.getLocalizedMessage());
+
+        return handleExceptionInternal(ex, responseBody, headers, status, request);
     }
 }

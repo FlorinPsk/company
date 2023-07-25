@@ -4,6 +4,7 @@ import com.sda.company.dto.CompanyCreateDTO;
 import com.sda.company.dto.CompanyDisplayDTO;
 import com.sda.company.dto.CompanyUpdateDTO;
 import com.sda.company.model.Company;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface CompanyService {
     CompanyDisplayDTO updateCompany(CompanyUpdateDTO companyUpdateDTO);
 
     void deleteCompanyById(Integer id);
+
+    Page<CompanyDisplayDTO> findPage(Integer currentPage);
 }

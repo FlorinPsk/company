@@ -42,7 +42,9 @@ public class CompanyController {
             Principal principal) {      // The principal object is used for user's permissions
         CompanyDisplayDTO companyDisplayDTO = companyService
                 .createCompany(companyCreateDTO);
-        System.out.printf("Request has been made by %s", principal.getName());
+        if (principal != null) {
+            System.out.printf("Request has been made by %s", principal.getName());
+        }
 
         return ResponseEntity.ok(companyDisplayDTO);
     }

@@ -24,11 +24,24 @@ public class Employee {
     @Column
     private String address;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private JobTitle jobTitle;
 
     @Column
     private Long salary;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = true)   // so we can have an employee without company_id
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Integer getId() {
         return id;

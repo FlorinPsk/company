@@ -4,6 +4,7 @@ import com.sda.company.dto.EmployeeCreateDTO;
 import com.sda.company.dto.EmployeeDisplayDTO;
 import com.sda.company.service.EmployeeService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,12 @@ public class EmployeeController {
         EmployeeDisplayDTO employeeDisplayDTO = employeeService.findByName(name);
 
         return ResponseEntity.ok(employeeDisplayDTO);
+    }
+
+    @GetMapping("/assign")
+    public ResponseEntity<String> assignEmployee(@RequestParam @NotNull Integer employeeId,
+                                                 @RequestParam @NotNull Integer companyId) {
+
+        return ResponseEntity.ok(employeeService.assignEmployee(employeeId, companyId));
     }
 }

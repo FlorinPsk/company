@@ -15,4 +15,6 @@ public interface EmployeeService {
     void saveAll(List<Employee> employees);
 
     EmployeeDisplayDTO findByName(String name);
+
+    String assignEmployee(Integer employeeId, Integer companyId);
 }

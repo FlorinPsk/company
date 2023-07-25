@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Landing Page</title>
+</head>
+<body>
+
+<h1>Company table</h1>
+
+<form th:action="@{/home}" method="get">
+    <input type="submit" value="Return home">
+</form>
+
+<table style="text-align: center; border: 1px solid black; border-collapse: collapse">
+    <thead style="font-weight: bold">
+    <tr>
+        <td style="border: 1px solid black">ID</td>
+        <td style="border: 1px solid black">Name</td>
+        <td style="border: 1px solid black">Registration Number</td>
+        <td style="border: 1px solid black">Address</td>
+<!--        <td style="border: 1px solid black">Phone Number</td>-->
+        <td style="border: 1px solid black">Email</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="company : ${companyList}">
+        <td style="border: 1px solid black" th:text="${company.id}"></td>
+        <td style="border: 1px solid black" th:text="${company.name}"></td>
+        <td style="border: 1px solid black" th:text="${company.registrationNumber}"></td>
+        <td style="border: 1px solid black" th:text="${company.address}"></td>
+<!--        <td style="border: 1px solid black" th:text="${company.phoneNumber}"></td>-->
+        <td style="border: 1px solid black" th:text="${company.email}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+<footer style="font-size: large" class="panel-footer">
+    Total items [[${totalItems}]]
+    <br>
+    Page: [[${currentPage}]] of [[${totalPages}]]
+    <br>
+    <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+        <a th:href="@{'/showAll/' + ${i}}">[[${i}]]</a>
+    </span>
+    <br>
+</footer>
+</html>

@@ -1,5 +1,6 @@
 package com.sda.company.dto;
 
+import com.sda.company.model.Company;
 import com.sda.company.model.JobTitle;
 import jakarta.validation.constraints.*;
 

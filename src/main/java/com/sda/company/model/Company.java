@@ -2,6 +2,8 @@ package com.sda.company.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Company {
 
@@ -20,6 +22,17 @@ public class Company {
 
     @Column
     private String email;
+
+    @OneToMany(mappedBy = "company")
+    private List<Employee> employeeList;
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
 
     public Integer getId() {
         return id;

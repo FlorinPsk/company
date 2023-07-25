@@ -8,6 +8,7 @@ import com.sda.company.exceptions.EntityException;
 import com.sda.company.model.Company;
 import com.sda.company.repository.CompanyRepository;
 import com.sda.company.service.CompanyService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -89,5 +90,14 @@ public class CompanyServiceImpl implements CompanyService {
             throw new EntityException(String.format("Company with id %s was not found.", id));
         }
         companyRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<CompanyDisplayDTO> findPage(Integer currentPage) {
+        Pageable pageable = PageRequest.of(currentPage - 1, 10, Sort.by("id"));
+        Page<Company> companyPage = companyRepository.findAll(pageable);
+        Page<CompanyDisplayDTO> companyDisplayDTOPage = companyPage.map(CompanyConvertor::entityToDisplayDto);
+
+        return companyDisplayDTOPage;
     }
 }

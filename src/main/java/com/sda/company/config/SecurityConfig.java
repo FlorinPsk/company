@@ -72,11 +72,14 @@ public class SecurityConfig {
                     auth.requestMatchers("/api/v1/employee/findAll").hasRole(ROLE_USER);
                     auth.requestMatchers("/api/v1/employee/findByName/{name}").hasRole(ROLE_ADMIN);
                     auth.requestMatchers("/api/v1/employee/generate").hasRole(ROLE_POWER_USER);
+                    auth.requestMatchers("api/v1/employee/assign").hasRole(ROLE_ADMIN);
 
                     // for thymeleaf
                     auth.requestMatchers("/").hasRole(ROLE_USER);
                     auth.requestMatchers("/start").hasRole(ROLE_USER);
                     auth.requestMatchers("/company").hasRole(ROLE_USER);
+                    auth.requestMatchers("/showAll/{pageNumber}").hasRole(ROLE_USER);
+                    auth.requestMatchers("/home").hasRole(ROLE_USER);
                 })
                 .httpBasic(Customizer.withDefaults());
 

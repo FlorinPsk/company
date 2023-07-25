@@ -8,6 +8,12 @@
 
 <p>Welcome to the company.</p>
 
+<form th:action="@{/showAll/1}" method="get">
+    <input type="hidden" name="_method" value="get">
+    <input type="submit" value="Show all companies.">
+
+</form>
+
 <a th:href="@{/start}"> Go back to the app...</a>
 
 </body>

@@ -5,9 +5,11 @@ import com.sda.company.service.CompanyService;
 import com.sda.company.thymeleaf.model.GDPRConsent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -57,8 +59,21 @@ public class CompanyControllerThymeleaf {
         return "company";
     }
 
-    @RequestMapping(value = "/showAll", method = RequestMethod.GET)
-    public String showAllCompanies(Model model) {
-        List<CompanyDisplayDTO> companies = companyService.findAll();
+    @RequestMapping(value = "/showAll/{pageNumber}", method = RequestMethod.GET)
+    public String showAllCompanies(Model model, @PathVariable("pageNumber") Integer currentPage) {
+        Page<CompanyDisplayDTO> page = companyService.findPage(currentPage);
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("companyList", page.getContent());
+
+        return "companyTable";
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String returnHome() {
+
+        return "company";
     }
 }

@@ -1,5 +1,6 @@
 package com.sda.company.dto;
 
+import com.sda.company.model.Company;
 import com.sda.company.model.JobTitle;
 
 public class EmployeeDisplayDTO {
@@ -19,6 +20,16 @@ public class EmployeeDisplayDTO {
     private JobTitle jobTitle;
 
     private Long salary;
+
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Integer getId() {
         return id;
